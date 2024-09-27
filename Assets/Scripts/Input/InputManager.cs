@@ -2,7 +2,7 @@ public class InputManager
 {
     private PlayerControls playerControls;
 
-    public float Momevent => playerControls.Gameplay.Movement.ReadValue<float>();
+    public float Movement => playerControls.Gameplay.Movement.ReadValue<float>();
 
     public InputManager()
     {
