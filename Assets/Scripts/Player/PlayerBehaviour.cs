@@ -7,10 +7,12 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float jumpForce = 5;
 
     private Rigidbody2D rigidbody;
+    private IsGroundChecker isGroundChecker;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        isGroundChecker = GetComponent<IsGroundChecker>();
     }
  
     void Start()
@@ -24,6 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void HandleJump()
     {
+        if (isGroundChecker.IsGrounded() == false) return;
         rigidbody.velocity += Vector2.up * jumpForce;
     }
 }
