@@ -10,4 +10,8 @@ public class IsGroundChecker : MonoBehaviour
    {
         return Physics2D.OverlapBox(checkerPosition.position, checkerSize, 0f, groundLayer);
    }
+   private void OnDrawGizmos()
+   {
+        Gizmos.DrawWireCube(checkerPosition.position, checkerSize);
+   }
 }
