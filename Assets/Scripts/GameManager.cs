@@ -11,5 +11,4 @@ public class GameManager : MonoBehaviour
 
         inputManager = new InputManager();
     }
-    
 }
