@@ -1,4 +1,6 @@
 using UnityEngine;
+
+
 public class MeleeEnemy : BaseEnemy
 {
     [SerializeField] private Transform detectPosition;
@@ -7,8 +9,18 @@ public class MeleeEnemy : BaseEnemy
 
     protected override void Update()
     {
-        print("is in sight? " + PlayerInSight());
+        //cooldownTimer += Time.deltaTime;
+        VerifyCanAttack();
     }
+    private void VerifyCanAttack()
+    {
+        //if (cooldownTime < attackCoolDown || canAttack == false) return;
+        if(PlayerInSight())
+        {
+            animator.SetTrigger("attack");
+        }
+    }
+
     private bool PlayerInSight()
     {
         Collider2D playerCollider = Physics2D.OverlapBox(detectPosition.position, detectBoxSize, 0f, playerLayer);
