@@ -13,6 +13,9 @@ public class PlayerAnim : MonoBehaviour
         playerHealth = GetComponent<Health>();
 
         playerHealth.OnHurt += PlayHurtAnim;
+
+        GameManager.Instance.inputManager.OnAttack += PlayAttackAnim;
+
     }
     private void Update()
     {
@@ -23,5 +26,9 @@ public class PlayerAnim : MonoBehaviour
     private void PlayHurtAnim()
     {
         animator.SetTrigger("hurt");
+    }
+    private void PlayAttackAnim()
+    {
+        animator.SetTrigger("attack");
     }
 }
