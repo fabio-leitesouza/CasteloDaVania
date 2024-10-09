@@ -60,7 +60,7 @@ public class MeleeEnemy : BaseEnemy
 
     private void PlayHurtAudio()
     {
-        audioSource.clip = audioClips[1];
+        // audioSource.clip = audioClips[1];
         audioSource.Play();
     }
 
