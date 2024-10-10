@@ -1,43 +1,48 @@
+using System;
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehavior : MonoBehaviour
 {
-    
     [SerializeField] private float moveSpeed = 5;
-    [SerializeField] private float jumpForce = 5;
+    [SerializeField] private float jumpForce = 3;
 
     [Header("Propriedades de ataque")]
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private Transform attackPosition;
     [SerializeField] private LayerMask attackLayer;
 
+    private float moveDirection;
 
     private Rigidbody2D rigidbody;
-    private IsGroundChecker isGroundChecker;
-    private float moveDirection;
+    private Health health;
+    private IsGroundedChecker isGroundedCheker;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        isGroundChecker = GetComponent<IsGroundChecker>();
+        isGroundedCheker = GetComponent<IsGroundedChecker>();
+        health = GetComponent<Health>();
+        health.OnHurt += PlayHurtAudio;
+        health.OnDead += HandlePlayerDeath;
     }
- 
-    void Start()
+
+    private void Start()
     {
-        GameManager.Instance.inputManager.OnJump += HandleJump;
+        GameManager.Instance.InputManager.OnJump += HandleJump;
     }
 
     private void Update()
-    {     
+    {
         MovePlayer();
         FlipSpriteAccordingToMoveDirection();
     }
 
     private void MovePlayer()
     {
-        moveDirection = GameManager.Instance.inputManager.Movement;
+        moveDirection = GameManager.Instance.InputManager.Movement;
         transform.Translate(moveDirection * Time.deltaTime * moveSpeed, 0, 0);
     }
+
     private void FlipSpriteAccordingToMoveDirection()
     {
         if (moveDirection < 0)
@@ -50,19 +55,24 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-
     private void HandleJump()
     {
-        if (isGroundChecker.IsGrounded() == false) return;
+        if (isGroundedCheker.IsGrounded() == false) return;
         rigidbody.velocity += Vector2.up * jumpForce;
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerJump);
+    }
+
+    private void PlayHurtAudio()
+    {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerHurt);
     }
 
     private void HandlePlayerDeath()
     {
         GetComponent<Collider2D>().enabled = false;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-        //GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerDeath);
-        //GameManager.Instance.InputManager.DisablePlayerInput();
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerDeath);
+        GameManager.Instance.InputManager.DisablePlayerInput();
     }
 
     private void Attack()
@@ -70,7 +80,7 @@ public class PlayerBehaviour : MonoBehaviour
         Collider2D[] hittedEnemies =
             Physics2D.OverlapCircleAll(attackPosition.position, attackRange, attackLayer);
 
-        // GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerAttack);
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerAttack);
 
         foreach (Collider2D hittedEnemy in hittedEnemies)
         {
@@ -80,11 +90,15 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
     }
+
+    private void PlayWalkSound()
+    {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerWalk);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(attackPosition.position, attackRange);
     }
-
-
 }

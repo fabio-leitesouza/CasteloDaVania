@@ -24,16 +24,24 @@ public class MeleeEnemy : BaseEnemy
     {
         cooldownTimer += Time.deltaTime;
         VerifyCanAttack();
+        if (cooldownTimer > attackCooldown)
+        {
+            GetComponent<MoveEnemy>().enabled = true;
+        }
     }
 
     private void VerifyCanAttack()
     {
         if (cooldownTimer < attackCooldown || canAttack == false) return;
+        
+
         if (PlayerInSight())
         {
-            animator.SetTrigger("attack");
-            AttackPlayer();
+            GetComponent<MoveEnemy>().enabled = false;
+            animator.SetTrigger("attack");            
+            AttackPlayer();            
         }
+        
     }
 
     private void AttackPlayer()
@@ -60,13 +68,13 @@ public class MeleeEnemy : BaseEnemy
 
     private void PlayHurtAudio()
     {
-        // audioSource.clip = audioClips[1];
+        audioSource.clip = audioClips[1];
         audioSource.Play();
     }
 
     private void PlayDeadAudio()
     {
-        //audioSource.clip = audioClips[2];
+        audioSource.clip = audioClips[2];
         audioSource.Play();
     }
 

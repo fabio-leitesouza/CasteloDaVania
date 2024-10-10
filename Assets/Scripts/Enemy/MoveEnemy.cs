@@ -29,7 +29,8 @@ public class MoveEnemy : MonoBehaviour
             if (transform.position == pontoFinal)
             {
                 indoParaDireita = false; // Mude a direção
-                transform.localScale = Vector3.one;
+                
+                transform.localScale = new Vector3(-1, 1, 1);
 
             }
         }
@@ -40,7 +41,7 @@ public class MoveEnemy : MonoBehaviour
 
             {
                 indoParaDireita = true; // Mude a direção
-                transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = Vector3.one;
 
 
             }

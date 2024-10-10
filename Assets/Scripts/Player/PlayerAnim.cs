@@ -3,23 +3,23 @@ using UnityEngine;
 public class PlayerAnim : MonoBehaviour
 {
     private Animator animator;
-    private IsGroundChecker groundedChecker;
+    private IsGroundedChecker groundedChecker;
     private Health playerHealth;
    
     private void Awake()
     {
         animator = GetComponent<Animator> ();
-        groundedChecker = GetComponent<IsGroundChecker>();
+        groundedChecker = GetComponent<IsGroundedChecker>();
         playerHealth = GetComponent<Health>();
 
         playerHealth.OnHurt += PlayHurtAnim;
 
-        GameManager.Instance.inputManager.OnAttack += PlayAttackAnim;
+        GameManager.Instance.InputManager.OnAttack += PlayAttackAnim;
 
     }
     private void Update()
     {
-        bool isWalking = GameManager.Instance.inputManager.Movement != 0;
+        bool isWalking = GameManager.Instance.InputManager.Movement != 0;
         animator.SetBool("isWalking", isWalking);
         animator.SetBool("isJumping", !groundedChecker.IsGrounded());
     }
