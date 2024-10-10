@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerBehavior : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5;
     [SerializeField] private float jumpForce = 3;
