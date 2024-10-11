@@ -63,7 +63,17 @@ public class PlayerBehaviour : MonoBehaviour
     private void MovePlayer()
     {
         moveDirection = GameManager.Instance.InputManager.Movement;
-        transform.Translate(moveDirection * Time.deltaTime * moveSpeed, 0, 0);
+
+        if (isCrouching)
+        {
+            // Se agachado, limitar o movimento horizontal (ou permitir com velocidade reduzida)
+            transform.Translate(moveDirection * Time.deltaTime * crouchSpeed, 0, 0);
+        }
+        else
+        {
+            // Movimentação normal
+            transform.Translate(moveDirection * Time.deltaTime * moveSpeed, 0, 0);
+        }
     }
 
     private void HandleCrouch(bool crouching)
@@ -73,12 +83,14 @@ public class PlayerBehaviour : MonoBehaviour
         if (crouching)
         {
             // Mudar o tamanho do colisor e reduzir a velocidade
+            Debug.Log("Personagem agachou");
             boxCollider.size = crouchColliderSize;
             moveSpeed = crouchSpeed;
         }
         else
         {
             // Voltar ao estado normal
+            Debug.Log("Personagem levantou");
             boxCollider.size = normalColliderSize;
             moveSpeed = 5;
         }
