@@ -13675,7 +13675,7 @@ MonoBehaviour:
   jumpForce: 3
   crouchSpeed: 2
   crouchColliderSize: {x: 1, y: 0.5}
-  normalColliderSize: {x: 1, y: 2}
+  normalColliderSize: {x: 0.5, y: 0.8890445}
   slideSpeed: 8
   slideDuration: 0.5
   attackRange: 0.55
