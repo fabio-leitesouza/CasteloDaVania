@@ -9,6 +9,8 @@ public class InputManager
 
     public event Action OnJump;
     public event Action OnAttack;
+    public event Action OnSlide;
+    public event Action<bool> OnCrouch;
 
     public InputManager()
     {
@@ -17,6 +19,7 @@ public class InputManager
 
         playerControls.Gameplay.Jump.performed += OnJumpPerformed;
         playerControls.Gameplay.Attack.performed += OnAttackPerformed;
+        playerControls.Gameplay.Slide.performed += OnSlidePerformed;
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
@@ -25,6 +28,19 @@ public class InputManager
     }
 
     private void OnAttackPerformed(InputAction.CallbackContext obj) => OnAttack?.Invoke();
+
+    private void OnSlidePerformed(InputAction.CallbackContext context)
+    {
+        OnSlide?.Invoke();
+    }
+    private void OnCrouchStarted(InputAction.CallbackContext context)
+    {
+        OnCrouch?.Invoke(true);  // Inicia o agachamento
+    }
+    private void OnCrouchCanceled(InputAction.CallbackContext context)
+    {
+        OnCrouch?.Invoke(false);  // Encerra o agachamento
+    }
 
     public void DisablePlayerInput() => playerControls.Gameplay.Disable();
 

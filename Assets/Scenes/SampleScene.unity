@@ -13662,7 +13662,7 @@ MonoBehaviour:
   checkerSize: {x: 0.38, y: 0.35}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!114 &1788962761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13689,7 +13689,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 3
-  attackRange: 0.67
+  crouchSpeed: 2
+  crouchColliderSize: {x: 1, y: 0.5}
+  normalColliderSize: {x: 1, y: 2}
+  slideSpeed: 8
+  slideDuration: 0.5
+  attackRange: 0.55
   attackPosition: {fileID: 1019792311}
   attackLayer:
     serializedVersion: 2
