@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915cf22a9d52a434eada48ef16b3ef57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionsPanel: {fileID: 2052528025}
   startButton: {fileID: 1497443507}
   optionsButton: {fileID: 1126546519}
   exitButton: {fileID: 2130800278}
@@ -1507,7 +1508,7 @@ GameObject:
   - component: {fileID: 2052528028}
   - component: {fileID: 2052528027}
   m_Layer: 5
-  m_Name: OptionsPanel
+  m_Name: OptionsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
