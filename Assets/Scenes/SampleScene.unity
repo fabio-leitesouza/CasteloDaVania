@@ -13672,7 +13672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 3
+  jumpForce: 5
   crouchSpeed: 2
   crouchColliderSize: {x: 1, y: 0.5}
   normalColliderSize: {x: 0.5, y: 0.8890445}
