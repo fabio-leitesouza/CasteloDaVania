@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
+    [SerializeField] private GameObject optionsPanel;
     [Header("Menu UI properties")]
     [SerializeField] private Button startButton;
     [SerializeField] private Button optionsButton;
@@ -24,7 +25,7 @@ public class MenuUI : MonoBehaviour
     private void OptionGame()
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
-        
+        optionsPanel.SetActive(true);
     }
 
     private void ExitGame()
