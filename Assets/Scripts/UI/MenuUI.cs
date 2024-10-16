@@ -12,16 +12,24 @@ public class MenuUI : MonoBehaviour
     private void OnEnable()
     {
         startButton.onClick.AddListener(GoToGameplayScene);
+        optionsButton.onClick.AddListener(OptionGame);
         exitButton.onClick.AddListener(ExitGame);
     }
 
     private void GoToGameplayScene()
     {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
         SceneManager.LoadScene("Gameplay");
+    }
+    private void OptionGame()
+    {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
+        
     }
 
     private void ExitGame()
     {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
